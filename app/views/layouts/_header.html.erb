@@ -4,9 +4,9 @@
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
     <a href="#home" class="w3-bar-item w3-button"><b>ME</b>  Management</a>
     <div class="w3-right w3-hide-small">
-      <a href="#projects" class="w3-bar-item w3-button">Projects</a>
+      <%= link_to "Signin",new_user_session_path, class:"w3-bar-item w3-button"%>
+      <%= link_to "Signup",new_user_registration_path, class:"w3-bar-item w3-button"%>
       <a href="#about" class="w3-bar-item w3-button">About</a>
-      <%= link_to "SignUp","#", class:"w3-bar-item w3-button"%>
     </div>
   </div>
 </header>
