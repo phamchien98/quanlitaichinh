@@ -1,0 +1,24 @@
+<div class="center w3-container w3-padding-32" id="projects">
+<div class="p-5">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-4 landing-right text-center align-self-lg-center">
+        <div class="form-login-box p-5">
+          <h3>Log in</h3>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.email_field :email, class: "form-control my-4 mx-1", placeholder: "Email" %>
+            <%= f.password_field :password, class: "form-control my-3 mx-1", placeholder: "Password" %>
+            <div class="field">
+              <% if devise_mapping.rememberable? %>
+                <%= f.check_box :remember_me, class: "m-1" %>
+                <%= f.label :remember_me %>
+              <%end%>
+              </div>
+            <%= f.submit "Log in", class: "btn btn-primary m-4" %><br>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

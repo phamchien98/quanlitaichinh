@@ -1,0 +1,23 @@
+<div class="center w3-container w3-padding-32" id="projects">
+<div class="p-5">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-4 landing-right text-center align-self-lg-center">
+        <div class="form-login-box p-5">
+          <h3>Sign up</h3>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+            <%= f.text_field :name, class: "form-control my-3 mx-1", placeholder: "Name" %>
+            <%= f.email_field :email, class: "form-control my-3 mx-1", placeholder: "Email" %>
+            <%= f.password_field :password, class: "form-control my-3 mx-1", placeholder: "Password" %>
+            <%= f.password_field :password, class: "form-control my-3 mx-1", placeholder: "Password Confirmation" %>
+            <%= f.submit "Sign up", class: "btn btn-primary m-3" %><br>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<%= stylesheet_link_tag "signup" %> 
