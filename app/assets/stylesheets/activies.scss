@@ -1,0 +1,26 @@
+.my-calendar {
+  padding-left: 15px;
+}
+.font-text {
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+}
+.day {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.day-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 0.75em;
+  color: blue;
+}
+.expence-form {
+  background-color: rgba(255, 0, 0, 0.6) !important;
+}
+.font-money-expence{
+  float: right;
+  color: red;
+}

@@ -1,0 +1,18 @@
+<div class="center" id="projects">
+<div>
+  <div >
+    <div class="row d-flex justify-content-center">
+      <div class="landing-right text-center align-self-lg-center">
+        <div>
+          <%= form_for :activity do |f| %>
+            <%= f.date_field :time, class: "form-control my-3 mx-1", placeholder: "Time" %>
+            <%= f.text_field :money, class: "form-control my-3 mx-1", placeholder: "Money Expence" %>
+            <%= f.text_field :note, class: "form-control my-3 mx-1", placeholder: "Content Expence" %><br/>
+            <%= f.submit "Save", class: "btn btn-primary"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
