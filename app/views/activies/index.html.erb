@@ -1,20 +1,29 @@
-<div class="col-8">
-	<%= month_calendar start_date_param: :my_date do |date| %>
-	<div class="day">
-	  <%= date.day %>
-  	  <% @activies.each do |f| %>
-          <%if date.to_s == f.time&.to_date.to_s %>
-            <div style="min-height: 20px">+100</div> 
-            <div class="font-money-expence"><%= f.money %></div>
-          <%end%>
+<div class="col-8", id="calendar">
+  <%= month_calendar start_date_param: :my_date do |date| %>
+    <% activies_by_day = @activies.select { |a| a.time.to_date == date } %>
+    <div class="day" data-date="<%= date %>" data-toggle="tooltip" data-html="true" title="<% activies_by_day.each do |active| %><div class='money'><%= active.come? ? "+#{active.money}"+"&emsp;"+ active.note : "-#{active.money}"+"&emsp;"+ active.note %></div><% end %>">
+    <%= date.day %>
+    <% @sum_come = 0 %>
+    <% @sum_out = 0 %>
+    <% activies_by_day.each do |f| %>
+      <% if f.come? %>
+        <% @sum_come = @sum_come + f.money %>
+      <% else %>
+        <% @sum_out = @sum_out + f.money %>
       <% end %>
-  	  <%= link_to "javascript:void())", data: {target: "#Modal_activies", toggle: "modal" } do %>
-  	  	<i class="fas fa-pencil-alt day-icon"></i>
-  	  <%end%> 
-	</div>
-	<% end %>
+    <% end %>
 
-	<!-- <i data-toggle="modal" data-target="#Modal_activies" class="fas fa-pencil-alt day-icon"></i> -->
+    <% unless @sum_come == 0 %>
+      <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
+    <% end %>
+    <% unless @sum_out == 0 %>
+      <div class="font-money-out modal-activity sum-money-out"><%= "-#@sum_out" %></div>
+    <% end %>
+    <%= link_to "javascript:void())", data: {target: "#Modal_activies", toggle: "modal", day: date } do %>
+      <i class="fas fa-pencil-alt day-icon"></i>
+    <% end %> 
+  </div>
+  <% end %>
 </div>
 
 <!-- Modal -->

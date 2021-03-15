@@ -1,0 +1,22 @@
+var modalElement = $('#Modal_activies');
+modalElement.modal('hide');
+modalElement.find('#activity_time').val('');
+modalElement.find('#activity_money').val('');
+modalElement.find('#activity_note').val('');
+
+var dayElement = $('.day[data-date="<%= @activity.time %>"]');
+var sumMoneyComeElement = dayElement.find('.sum-money-come');
+var sumMoneyOutElement = dayElement.find('.sum-money-out');
+
+<% if @activity.come? %>
+  var sumcome = parseFloat(sumMoneyComeElement.text().split('+')[1]) + <%= @activity.money %>;
+  sumMoneyComeElement.text('+' + sumcome);
+
+  dayElement.attr('data-original-title', dayElement.attr('data-original-title') + '<div class="money"><%= @activity.come? ? "+#{@activity.money}"+ @activity.note : "-#{@activity.money}"+ @activity.note %></div>')
+            .tooltip('show');
+<% else %>
+  var sumout = parseFloat(sumMoneyOutElement.text().split('-')[1]) + <%= @activity.money %>;
+  sumMoneyOutElement.text('-' + sumout);
+  dayElement.attr('data-original-title', dayElement.attr('data-original-title') + '<div class="money"><%=  "-#{@activity.money}"+ @activity.note %></div>')
+            .tooltip('show');
+<% end %>
