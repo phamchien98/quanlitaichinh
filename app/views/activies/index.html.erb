@@ -17,7 +17,7 @@
       <% @sum_come_month = @sum_come_month + @sum_come %>
       <% @sum_out_month = @sum_out_month + @sum_out%>
       <% unless @sum_come == 0 %>
-        <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
+      <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
       <% end %>
       <% unless @sum_out == 0 %>
         <div class="font-money-out modal-activity sum-money-out"><%= "-#@sum_out" %></div>
@@ -32,14 +32,14 @@
 <% unless @sum_come_month==0 && @sum_out_month==0 %>
   <div class="col-md-6 offset-md-2 mb-5 border border-secondary">
     <div class="row">
-      <div class="col-4 text-center text-title">Month money come</div>
-      <div class="col-4 text-center text-title">Month money out</div>
-      <div class="col-4  text-center text-title">Money Balance</div>
+      <div class="col-4 text-center ">Month money come</div>
+      <div class="col-4 text-center ">Month money out</div>
+      <div class="col-4  text-center ">Money Balance</div>
     </div>
     <div class="row">
-      <div class="col-4 text-center money "><%= @sum_come_month %></div>
-      <div class="col-4 text-center money "><%= @sum_out_month %></div>
-      <div class="col-4  text-center money "><%= @sum_come_month - @sum_out_month %></div>
+      <div class="col-4 text-center "><%= @sum_come_month %></div>
+      <div class="col-4 text-center "><%= @sum_out_month %></div>
+      <div class="col-4  text-center "><%= @sum_come_month - @sum_out_month %></div>
     </div>
   </div>
 <% end %>
@@ -61,4 +61,3 @@
 </div>
 
 <%= stylesheet_link_tag "activies" %>
-<%= stylesheet_link_tag "statistic" %>

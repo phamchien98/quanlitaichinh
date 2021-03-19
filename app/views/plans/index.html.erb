@@ -9,19 +9,23 @@
       <th scope="col">STT</th>
       <th scope="col">Start date</th>
       <th scope="col">End date</th>
-      <th scope="col">Plan money come (VND)</th>
-      <th scope="col">Plan money out (VND)</th>
+      <th scope="col">Plan come(VND)</th>
+      <th scope="col">Plan out(VND)</th>
+      <th scope="col">Reality come(VND)</th>
+      <th scope="col">Reality out(VND)</th>
     </tr>
   </thead>
   <tbody>
-    <% @plans.each do |plan| %>
-      <tr>
-        <th scope="row"><%= plan.id %></th>
-        <td><%= plan.start_date %></td>
-        <td><%= plan.end_date %></td>
-        <td><%= plan.plan_money_come %></td>
-        <td><%= plan.plan_money_out %></td>
-      </tr>
+  	<% @statistics.each do |statistic| %>
+	    <tr>
+	      <th scope="row"><%= statistic.id %></th>
+	      <td><%= statistic.start_date %></td>
+	      <td><%= statistic.end_date %></td>
+	      <td><%= statistic.plan_money_come %></td>
+	      <td><%= statistic.plan_money_out %></td>
+        <td><%= statistic.money_come %></td>
+        <td><%= statistic.money_out %></td>
+	    </tr>
     <% end %>
   </tbody>
 </table>
