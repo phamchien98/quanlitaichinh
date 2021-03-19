@@ -1,0 +1,28 @@
+<%= link_to new_user_plan_path(current_user.id) do %>
+	<button type="button" class="btn btn-success ml-2 mb-3 px-4">New</button>
+<%end%>
+
+<div class ="container pb-5">
+<table class="table table-bordered">	
+  <thead  class="thead-dark">
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Start date</th>
+      <th scope="col">End date</th>
+      <th scope="col">Plan money come (VND)</th>
+      <th scope="col">Plan money out (VND)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @plans.each do |plan| %>
+      <tr>
+        <th scope="row"><%= plan.id %></th>
+        <td><%= plan.start_date %></td>
+        <td><%= plan.end_date %></td>
+        <td><%= plan.plan_money_come %></td>
+        <td><%= plan.plan_money_out %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
