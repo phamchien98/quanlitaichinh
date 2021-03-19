@@ -4,10 +4,11 @@
     <div class="row d-flex justify-content-center">
       <div class="landing-right text-center align-self-lg-center">
         <div>
-          <%= form_for :activity do |f| %>
+          <%= form_for :activity, remote: true do |f| %>
+            <%= f.select :status, [["Money come","come"],["Money out","out"]], {}, class: "form-control my-3 mx-1" %>
             <%= f.date_field :time, class: "form-control my-3 mx-1", placeholder: "Time" %>
-            <%= f.text_field :money, class: "form-control my-3 mx-1", placeholder: "Money Expence" %>
-            <%= f.text_field :note, class: "form-control my-3 mx-1", placeholder: "Content Expence" %><br/>
+            <%= f.number_field :money, class: "form-control my-3 mx-1", placeholder: "Money" %>
+            <%= f.text_field :note, class: "form-control my-3 mx-1", placeholder: "Content Money" %><br/>
             <%= f.submit "Save", class: "btn btn-primary"%>
           <% end %>
         </div>
