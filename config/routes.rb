@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  root "static_pages#home"
   get 'home', to: 'users#home'
   devise_for :users
-  root "static_pages#home"
   resources :users do
     resources :activies
+    resources :plans
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
