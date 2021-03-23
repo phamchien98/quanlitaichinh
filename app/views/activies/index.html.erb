@@ -1,31 +1,48 @@
-<div class="col-8", id="calendar">
+<div class="col-8 pb-5", id="calendar">
+  <% @sum_come_month = 0 %>
+  <% @sum_out_month = 0 %>
   <%= month_calendar start_date_param: :my_date do |date| %>
     <% activies_by_day = @activies.select { |a| a.time.to_date == date } %>
-    <div class="day" data-date="<%= date %>" data-toggle="tooltip" data-html="true" title="<% activies_by_day.each do |active| %><div class='money'><%= active.come? ? "+#{active.money}"+"&emsp;"+ active.note : "-#{active.money}"+"&emsp;"+ active.note %></div><% end %>">
+  <div class="day" data-date="<%= date %>" data-toggle="tooltip" data-html="true" title="<% activies_by_day.each do |active| %><div class='money'><%= active.come? ? "+#{active.money}"+"&emsp;"+ active.note : "-#{active.money}"+"&emsp;"+ active.note %></div><% end %>">
     <%= date.day %>
-    <% @sum_come = 0 %>
-    <% @sum_out = 0 %>
-    <% activies_by_day.each do |f| %>
-      <% if f.come? %>
-        <% @sum_come = @sum_come + f.money %>
-      <% else %>
-        <% @sum_out = @sum_out + f.money %>
+      <% @sum_come = 0 %>
+      <% @sum_out = 0 %>
+      <% activies_by_day.each do |f| %>
+        <% if f.come? %>
+          <% @sum_come = @sum_come + f.money %>
+        <% else %>
+          <% @sum_out = @sum_out + f.money %>
+        <% end %>
       <% end %>
-    <% end %>
-
-    <% unless @sum_come == 0 %>
-      <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
-    <% end %>
-    <% unless @sum_out == 0 %>
-      <div class="font-money-out modal-activity sum-money-out"><%= "-#@sum_out" %></div>
-    <% end %>
-    <%= link_to "javascript:void())", data: {target: "#Modal_activies", toggle: "modal", day: date } do %>
-      <i class="fas fa-pencil-alt day-icon"></i>
-    <% end %> 
+      <% @sum_come_month = @sum_come_month + @sum_come %>
+      <% @sum_out_month = @sum_out_month + @sum_out%>
+      <% unless @sum_come == 0 %>
+        <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
+      <% end %>
+      <% unless @sum_out == 0 %>
+        <div class="font-money-out modal-activity sum-money-out"><%= "-#@sum_out" %></div>
+      <% end %>
+      <%= link_to "javascript:void())", data: {target: "#Modal_activies", toggle: "modal", day: date } do %>
+        <i class="fas fa-pencil-alt day-icon"></i>
+      <%end%> 
   </div>
   <% end %>
 </div>
 
+<% unless @sum_come_month==0 && @sum_out_month==0 %>
+  <div class="col-md-6 offset-md-2 mb-5 border border-secondary">
+    <div class="row">
+      <div class="col-4 text-center text-title">Month money come</div>
+      <div class="col-4 text-center text-title">Month money out</div>
+      <div class="col-4  text-center text-title">Money Balance</div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-center money "><%= @sum_come_month %></div>
+      <div class="col-4 text-center money "><%= @sum_out_month %></div>
+      <div class="col-4  text-center money "><%= @sum_come_month - @sum_out_month %></div>
+    </div>
+  </div>
+<% end %>
 <!-- Modal -->
 <div class="modal fade" id="Modal_activies" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -44,3 +61,4 @@
 </div>
 
 <%= stylesheet_link_tag "activies" %>
+<%= stylesheet_link_tag "statistic" %>
