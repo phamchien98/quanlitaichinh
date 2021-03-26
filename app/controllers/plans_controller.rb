@@ -1,4 +1,6 @@
 class PlansController < ApplicationController
+  before_action :set_plan,  only: %i(edit update destroy)
+
   def new
     @plan = Plan.new
   end
@@ -14,7 +16,8 @@ class PlansController < ApplicationController
     end
   end
 
-  def index    
+  def index
+    @plans = Plan.all
     @activities = Activity.select("time, SUM(IF(status = 1, money, 0)) AS thu, SUM(IF(status = 0, money, 0)) AS chi")
                           .where(user_id: current_user.id)
                           .where(time: Date.new(2020,11,1)..Date.new(2021,5,-1))
@@ -30,9 +33,31 @@ class PlansController < ApplicationController
     @statistics = @q.result.page(params[:page]).per(10)
   end
 
+  def edit; end
+
+  def update
+    if @plan.update(plan_params)
+      flash[:success] = "Success edit plan"
+      redirect_to user_plans_path(current_user.id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @plan.destroy
+    flash[:success] = "Plan deleted"
+    redirect_to user_plans_path(current_user.id)
+  end
+
   private
   
   def plan_params
     params.require(:plan).permit :start_date, :end_date, :plan_money_come, :plan_money_out
+  end
+
+  def set_plan
+    @plan = current_user.plans.find_by(id: params[:id])
+    redirect_to root_url if @plan.nil?
   end
 end

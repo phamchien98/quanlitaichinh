@@ -7,7 +7,7 @@
     input#search{
       width: 18rem;
       height: 40px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 1);
       border: none;
       font-size: 10pt;
       float: left;
@@ -27,10 +27,10 @@
       border-bottom-right-radius: 5px;
      
       border: none;
-      background: #67BF7F;
+      background: rgba(103, 191, 127, 1);
       height: 40px;
       width: 40px;
-      color: #4f5b66;
+      color: rgba(79, 91, 102, 1);
       font-size: 10pt;
       margin-left: -40px;
     }

@@ -1,45 +1,54 @@
 <div>
   <div class="row">
-
-    <%= link_to new_user_plan_path(current_user.id), class: "col-md-1 offset-md-2" do %>
+    <%= link_to new_user_plan_path, class: "col-md-1 offset-md-1" do %>
     	<button type="button" class="btn btn-success ml-2 mb-3 px-4">New</button>
     <%end%>
 
-    <%= search_form_for @q, url: user_plans_path(current_user.id), class: "col-md-3 offset-md-6 form-group field_search_name" do |f| %>
-      <%= f.search_field :start_date_or_end_date_cont , class: "form-control border rounded", id: "search"%>
+    <%= search_form_for @q, url: user_plans_path, class: "col-md-3 offset-md-7 form-group field_search_name" do |f| %>
+      <%= f.search_field :start_date_or_end_date_cont , placeholder: "Start date or end date", class: "form-control border rounded", id: "search" %>
       <%= f.button :submit, class: "icon" do %>
         <i class="fas fa-search"></i>
       <%end%>
-      <% end %>
+    <% end %>
   </div>
 
-  <div class ="col-md-6 offset-md-3 pb-5">
-  <table class="table table-bordered">	
-    <thead  class="thead-light">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Start date</th>
-        <th scope="col">End date</th>
-        <th scope="col">Plan come(VND)</th>
-        <th scope="col">Plan out(VND)</th>
-        <th scope="col">Reality come(VND)</th>
-        <th scope="col">Reality out(VND)</th>
-      </tr>
-    </thead>
-    <tbody>
-    	<% @statistics.each do |plan| %>
-  	    <tr>
-  	      <th scope="row"><%= plan.id %></th>
-  	      <td><%= plan.start_date %></td>
-  	      <td><%= plan.end_date %></td>
-  	      <td><%= plan.plan_money_come %></td>
-  	      <td><%= plan.plan_money_out %></td>
-          <td><%= plan.money_come %></td>
-          <td><%= plan.money_out %></td>
-  	    </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class ="col-md-7 offset-md-2 pb-5">
+    <table class="table table-bordered">	
+      <thead  class="thead-light">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Start date</th>
+          <th scope="col">End date</th>
+          <th scope="col">Plan come(VND)</th>
+          <th scope="col">Plan out(VND)</th>
+          <th scope="col">Reality come(VND)</th>
+          <th scope="col">Reality out(VND)</th>
+          <th scope="col">Process</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @statistics.each do |plan| %>
+    	    <tr>
+    	      <th scope="row"><%= plan.id %></th>
+    	      <td><%= plan.start_date %></td>
+    	      <td><%= plan.end_date %></td>
+    	      <td><%= plan.plan_money_come %></td>
+    	      <td><%= plan.plan_money_out %></td>
+            <td><%= link_to plan.money_come, "#" %></td>
+            <td><%= link_to plan.money_out, "#" %></td>
+            <td class="text-center">
+                <%= link_to edit_user_plan_path(current_user.id,plan.id) do %>
+                  <i class="far fa-edit"></i> 
+                <% end %>
+                &emsp;
+                <%= link_to user_plan_path(current_user.id,plan.id), method: :delete, data: {confirm: "You sure?"} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+            </td>
+    	    </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div class="d-flex justify-content-center"><%= paginate @statistics, theme: 'twitter-bootstrap-4'%> </div>
 </div>
