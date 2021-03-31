@@ -14,8 +14,7 @@ class PlansController < ApplicationController
     end
   end
 
-  def index
-    @plans = Plan.all
+  def index    
     @activities = Activity.select("time, SUM(IF(status = 1, money, 0)) AS thu, SUM(IF(status = 0, money, 0)) AS chi")
                           .where(user_id: current_user.id)
                           .where(time: Date.new(2020,11,1)..Date.new(2021,5,-1))
@@ -27,6 +26,8 @@ class PlansController < ApplicationController
                       .select("plans.id AS id,start_date,end_date,plan_money_come,plan_money_out,SUM(IF(activities.status = 1,activities.money,0)) AS money_come,SUM(IF(activities.status = 0,activities.money,0)) AS money_out")
                       .where(user_id: current_user.id)
                       .group(:id)	
+    @q = @statistics.ransack(params[:q])
+    @statistics = @q.result.page(params[:page]).per(10)
   end
 
   private

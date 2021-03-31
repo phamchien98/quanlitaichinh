@@ -1,32 +1,47 @@
-<%= link_to new_user_plan_path(current_user.id) do %>
-	<button type="button" class="btn btn-success ml-2 mb-3 px-4">New</button>
-<%end%>
+<div>
+  <div class="row">
 
-<div class ="container pb-5">
-<table class="table table-bordered">	
-  <thead  class="thead-dark">
-    <tr>
-      <th scope="col">STT</th>
-      <th scope="col">Start date</th>
-      <th scope="col">End date</th>
-      <th scope="col">Plan come(VND)</th>
-      <th scope="col">Plan out(VND)</th>
-      <th scope="col">Reality come(VND)</th>
-      <th scope="col">Reality out(VND)</th>
-    </tr>
-  </thead>
-  <tbody>
-  	<% @statistics.each do |statistic| %>
-	    <tr>
-	      <th scope="row"><%= statistic.id %></th>
-	      <td><%= statistic.start_date %></td>
-	      <td><%= statistic.end_date %></td>
-	      <td><%= statistic.plan_money_come %></td>
-	      <td><%= statistic.plan_money_out %></td>
-        <td><%= statistic.money_come %></td>
-        <td><%= statistic.money_out %></td>
-	    </tr>
-    <% end %>
-  </tbody>
-</table>
+    <%= link_to new_user_plan_path(current_user.id), class: "col-md-1 offset-md-2" do %>
+    	<button type="button" class="btn btn-success ml-2 mb-3 px-4">New</button>
+    <%end%>
+
+    <%= search_form_for @q, url: user_plans_path(current_user.id), class: "col-md-3 offset-md-6 form-group field_search_name" do |f| %>
+      <%= f.search_field :start_date_or_end_date_cont , class: "form-control border rounded", id: "search"%>
+      <%= f.button :submit, class: "icon" do %>
+        <i class="fas fa-search"></i>
+      <%end%>
+      <% end %>
+  </div>
+
+  <div class ="col-md-6 offset-md-3 pb-5">
+  <table class="table table-bordered">	
+    <thead  class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col">Plan come(VND)</th>
+        <th scope="col">Plan out(VND)</th>
+        <th scope="col">Reality come(VND)</th>
+        <th scope="col">Reality out(VND)</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @statistics.each do |plan| %>
+  	    <tr>
+  	      <th scope="row"><%= plan.id %></th>
+  	      <td><%= plan.start_date %></td>
+  	      <td><%= plan.end_date %></td>
+  	      <td><%= plan.plan_money_come %></td>
+  	      <td><%= plan.plan_money_out %></td>
+          <td><%= plan.money_come %></td>
+          <td><%= plan.money_out %></td>
+  	    </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  <div class="d-flex justify-content-center"><%= paginate @statistics, theme: 'twitter-bootstrap-4'%> </div>
 </div>
+
+<%= stylesheet_link_tag "plans" %>
