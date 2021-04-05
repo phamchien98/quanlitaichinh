@@ -25,3 +25,5 @@ function requireAll(r) { r.keys().forEach(r); }
 requireAll(require.context('./validation/', true, /\.js$/));
 
 require("packs/activities")
+require("packs/upload_image")
+require("packs/preview_img")

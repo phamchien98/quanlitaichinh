@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     resources :activies
     resources :plans
   end
+
+  resources :posts, only: %i(index show create) do
+    resources :photos, only: [:create]
+  end 
 end
