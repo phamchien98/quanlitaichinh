@@ -1,4 +1,4 @@
-<div class="col-8 pb-5", id="calendar">
+<div class="col-md-8 offset-md-2 mb-5", id="calendar">
   <% @sum_come_month = 0 %>
   <% @sum_out_month = 0 %>
   <%= month_calendar start_date_param: :my_date do |date| %>
@@ -30,13 +30,13 @@
 </div>
 
 <% unless @sum_come_month==0 && @sum_out_month==0 %>
-  <div class="col-md-6 offset-md-2 mb-5 border border-secondary">
-    <div class="row">
+  <div class="col-md-6 offset-md-3 mb-5 border rounded border-secondary">
+    <div class="row month-statistic p-2">
       <div class="col-4 text-center ">Month money come</div>
       <div class="col-4 text-center ">Month money out</div>
       <div class="col-4  text-center ">Money Balance</div>
     </div>
-    <div class="row">
+    <div class="row p-1">
       <div class="col-4 text-center "><%= @sum_come_month %></div>
       <div class="col-4 text-center "><%= @sum_out_month %></div>
       <div class="col-4  text-center "><%= @sum_come_month - @sum_out_month %></div>
@@ -48,7 +48,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">家計簿入力</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Revenue and Expenditure</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

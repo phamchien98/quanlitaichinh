@@ -1,26 +1,26 @@
 <div class="col-md-4 offset-md-4 p-5 border rounded border-secondary">
   <div class="text-center">
-    <h3>Enter Plan</h3>
+    <h3>Update your Plan</h3>
   </div>
-  <%= form_for @plan, url: user_plans_path(current_user.id) do |f| %>
+  <%= form_for @plan, url: user_plan_path(current_user.id,@plan.id) do |f| %>
     <div class="form-group col-md-8 offset-md-2">
-      <%= f.label :start_date %>
+      <%= f.label :start_date%>
       <%= f.date_field :start_date, class: "form-control" %>
     </div>
     <div class="form-group col-md-8 offset-md-2">
-        <%= f.label :end_date %>
+        <%= f.label :end_date%>
         <%= f.date_field :end_date, class: "form-control" %>
     </div>
     <div class="form-group col-md-8 offset-md-2">
-      <%= f.label :plan_money_come %>
+      <%= f.label :plan_money_come%>
       <%= f.number_field :plan_money_come, class: "form-control" %>
     </div>
     <div class="form-group col-md-8 offset-md-2">
-      <%= f.label :plan_money_out %>
+      <%= f.label :plan_money_out%>
       <%= f.number_field :plan_money_out, class: "form-control" %>
     </div>
     <div class="text-center p-3">
-      <%= f.submit "Save", class: "btn btn-primary", data: { disable_with: false } %>
+      <%= f.submit "Update", class: "btn btn-primary"%>
     </div>
   <% end %>
 </div>
