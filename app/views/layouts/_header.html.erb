@@ -5,7 +5,7 @@
     <a href="#home" class="w3-bar-item w3-button"><b>ME</b>  Management</a>
     <div class="w3-right w3-hide-small">
       <%if user_signed_in? %>
-        <%= link_to "Home", home_path, class:"w3-bar-item w3-button"%>
+        <%= link_to "Blog", posts_path, class:"w3-bar-item w3-button"%>
         <%= link_to "Activity", user_activies_path(current_user.id), class:"w3-bar-item w3-button"%>
         <%= link_to "Plan", user_plans_path(current_user.id), class:"w3-bar-item w3-button"%>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"w3-bar-item w3-button"%>
