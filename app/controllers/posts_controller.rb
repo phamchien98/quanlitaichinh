@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: %i(show)
+  before_action :find_post, only: %i(show destroy)
 
   def index
     @posts = Post.recent_post.limit(10).includes(:photos)
@@ -25,6 +25,19 @@ class PostsController < ApplicationController
   def show
     @photos = @post.photos
     set_meta_tags title: "Photo by "+@post.user.name
+  end
+
+  def destroy
+    if @post.user_id == current_user.id
+      if @post.destroy
+        flash[:notice] = "Post deleted!"
+      else
+        flash[:alert] = "Something went wrong ..."
+      end
+    else
+      flash[:notice] = "You don't permission to do that!"
+    end 
+    redirect_to posts_path
   end
 
   private
