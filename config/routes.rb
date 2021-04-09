@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i(index show create destroy) do
-    resources :photos, only: [:create]
+    resources :photos, only: %i(create)
+    resources :likes, except: :index, shallow: true
   end 
 end

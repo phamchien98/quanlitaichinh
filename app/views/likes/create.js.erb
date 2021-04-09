@@ -1,0 +1,2 @@
+$('#like-icon-post-<%= @post.id.to_s %>').html('<%= link_to like_path(@post.liked_by_user(current_user)), method: :delete, remote: true, class:"core-sprite loved hide-text" do %><i class="fas fa-heart fa-lg" style="color:red"></i><% end %>');
+$('#like-text-post-<%= @post.id.to_s %>').html('<%= j render "posts/like_text", {likes: @post.likes_sort_by_created_at} if @post.likes.present? %>');
