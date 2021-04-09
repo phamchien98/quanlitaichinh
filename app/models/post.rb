@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :photos, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   scope :recent_post, -> {order created_at: :desc}
 
