@@ -36,11 +36,22 @@
 
   <div class="card-body" >
     <div class="row actions pb-1">
-      <%= link_to "#", class:"core-sprite love hide-text" do %><i class="far fa-heart fa-lg"></i><% end %>&emsp;
+      <div id="like-icon-post-<%= post.id.to_s %>" >
+        <% if post.is_liked?(current_user) %>
+          <%= link_to like_path(post.liked_by_user(current_user)), method: :delete, remote: true, class:"core-sprite loved hide-text" do %><i class="fas fa-heart fa-lg" style="color:red"></i><% end %>
+        <% else %>
+          <%= link_to post_likes_path(post), method: :post, remote: true, class:"core-sprite love hide-text" do %><i class="far fa-heart fa-lg"></i><% end %>
+        <% end %>
+      </div>
+      &emsp;
       <%= link_to "#", class:"core-sprite comment hide-text" do %><i class="far fa-comment fa-lg"></i><% end %>
       <%= link_to "#", class:"core-sprite bookmark hide-text ml-auto" do %><i class="far fa-bookmark fa-lg"></i><% end %>
     </div>
-    <div><strong><%= pluralize(16,"like") %></strong></div>
+
+    <div id="like-text-post-<%= post.id.to_s %>">
+      <%= render "like_text", {likes: post.likes_sort_by_created_at} if post.likes.present? %>
+    </div>
+
     <div>
       <span><strong><%= post.user.name%></strong></span>
       <span><%= post.content %></span>

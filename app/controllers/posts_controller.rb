@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i(show destroy)
 
   def index
-    @posts = Post.recent_post.limit(10).includes(:photos)
+    @posts = Post.eager_load(:photos, :user, likes: :user).recent_post.limit 10
     @post = Post.new
   end
 
@@ -24,6 +24,8 @@ class PostsController < ApplicationController
 
   def show
     @photos = @post.photos
+    @likes = @post.likes.includes :user
+    @is_likes = @post.is_liked current_user
     set_meta_tags title: "Photo by "+@post.user.name
   end
 

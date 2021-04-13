@@ -1,0 +1,8 @@
+<% if likes.length == 1 %>
+  <strong><%= likes[0].user.name %></strong>
+<% elsif likes.length == 2 %>
+  <strong><%= likes[0].user.name + " and " + likes[1].user.name %></strong>
+<% else %>
+  <strong><%= "#{likes[0].user.name}, #{likes[1].user.name}" %></strong>
+  <%= "and #{(likes.length - 2)} orther#{(likes.length - 2) > 1 ? "s" : nil}" %>
+<% end %> liked this
