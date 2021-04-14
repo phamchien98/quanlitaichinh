@@ -1,5 +1,9 @@
+<% current_user.post_of_following.each do |post| %>
 <div class="card mb-5" >
   <div class="card-header" >
+    <%= link_to user_path(post.user), class: "no-text-decoration mr-3" do %>
+      <%= user_avatar(post.user, class: 'media-object rounded-circle avatar-blog-page') %>
+    <% end %>
     <%= link_to user_path(post.user), class: "nomal-color no-text-decoration", title: post.user.name do %>
       <strong><%= post.user.name %></strong>
     <% end %>
@@ -66,3 +70,4 @@
     </div>
   </div>
 </div>
+<% end %>

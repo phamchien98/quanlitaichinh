@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
-  def home
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.includes(:photos, :likes, :comments)
   end
 end
