@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  extend Dragonfly::Model
+  include Avatarable
+
+  dragonfly_accessor :photo
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,4 +19,8 @@ class User < ApplicationRecord
   validates :email, presence: true, length: {maximum: Settings.email_maximum},
   format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
   validates :password, length: {minimum: Settings.password_minimum}
+
+  def avatar_text
+    name[0]
+  end
 end
