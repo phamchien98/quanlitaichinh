@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :plans
   has_many :posts, dependent: :destroy
   has_many :likes
+  has_many :comments
 
   validates :name, presence: true, length: {maximum: Settings.name_maximum}
   validates :email, presence: true, length: {maximum: Settings.email_maximum},
