@@ -1,0 +1,35 @@
+<% current_user.users_yet_follow.each do |user| %>
+<% unless user.id == current_user.id %>
+  <div class="row mt-4">
+    <div class="col-2">
+      <%= link_to user_path(user), class: "no-text-decoration" do %>
+        <%= user_avatar(user, class: 'media-object rounded-circle avatar-blog-suggest-list') %>
+      <% end %>
+    </div>
+
+    <div class="col-7">
+      <div class="row">
+        <%= link_to user_path(user), class: "nomal-color no-text-decoration", title: user.name do %>
+          <strong><%= user.name %></strong>
+        <% end %>
+      </div>
+      <div class="row">
+        <p class="email"><%= user.email %></p>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <% if current_user.following? user %>
+        <%= form_with(model:current_user.active_relationships.find_by(followed_id:user.id),html: { method: :delete }, local: true) do |f| %>
+          <%= f.submit "Unfollow", class: "button-relationship-blog btn btn-secondary" %>
+        <% end %>
+      <% else %>
+        <%= form_with(model: current_user.active_relationships.build,local: true) do |f| %>
+          <div><%= hidden_field_tag :followed_id, user.id %></div>
+          <%= f.submit "Follow", class: "button-relationship-blog btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<%end%>

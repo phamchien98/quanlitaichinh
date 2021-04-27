@@ -1,0 +1,6 @@
+<div class="col-md-4 offset-md-4">
+  <strong>Suggested</strong>
+  <% @users.each do |user| %>
+    <%= render "suggest_follow_list", user: user %>
+  <% end %>
+</div>

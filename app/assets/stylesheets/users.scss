@@ -1,3 +1,133 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.avatar-circle {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  background-color: green;
+}
+
+.initials {
+  position: relative;
+  top: 25px; /* 25% of parent */
+  font-size: 50px; /* 50% of parent */
+  line-height: 50px; /* 50% of parent */
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+}
+
+.avatar-profile {
+  width: 14rem;
+  height: 14rem;
+}
+
+.avatar-blog-page {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.avatar-blog-suggest {
+  width: 4rem;
+  height: 4rem;
+}
+
+.avatar-blog-suggest-list {
+  width: 3rem;
+  height: 3rem;
+}
+
+.profile-wrapper {
+  padding: 60px 0;
+  border-bottom: 1px solid #efefef;
+
+  .username {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 200;
+  }
+
+  .email {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.common-btn {
+  height: 28px;
+  line-height: 24px;
+  padding: 0 24px;
+  border-color: #dbdbdb;
+  font-size: 14px;
+}
+
+.edit-profile-btn {
+  margin: 5px 0 0 15px;
+  font-weight: bold;
+}
+
+.setting {
+  margin: 7px 0 0 10px;
+  background-color: transparent;
+  background-position: -125px -355px;
+  height: 24px;
+  width: 24px;
+  border: none;
+}
+
+.profile-tab {
+  margin-top: 60px;
+
+  .nav-tabs {
+    border: 0;
+    border-top: 1px solid #ddd;
+
+    .nav-item {
+      border-radius: 0;
+      border: 0;
+      border-top: 1px solid transparent;
+      margin-top: -1px;
+      padding: 10px 0;
+      background: transparent;
+      font-weight: bold;
+      color: #999;
+    }
+
+    .nav-item.active {
+      color: #262626;
+      border-top: 1px solid #262626;
+    }
+  }
+
+  .post-stat {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    top: 0;
+    opacity: 0;
+  }
+
+  .col-4:hover .post-stat {
+    background-color: rgba(0,0,0,.3);
+    opacity: 1;
+  }
+
+  .image-preview {
+    margin-bottom: 30px;
+  }
+}
+
+.button-relationship {
+  width : 8rem;
+}
+
+.button-relationship-blog {
+  width : 5rem;
+}
+
+.switch {
+  text-color: blue;
+}
