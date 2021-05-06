@@ -9,6 +9,7 @@ class ActiviesController < ApplicationController
     end
 
     @activies = current_user.activities.where(time: Date.new(year,month,1)..Date.new(year,month,-1))
+    @receipts = current_user.receipts.where(time: Date.new(year,month,1)..Date.new(year,month,-1))
   rescue => e
     redirect_to action: :index
   end
@@ -23,8 +24,11 @@ class ActiviesController < ApplicationController
       if @activity.save
         format.js
       else
+        
+        p "saved errors"
         format.html { render action: "new" }
         format.json { render json: @activity.errors, status: :unprocessable_entity }
+        p @activity.errors
       end
     end
   end

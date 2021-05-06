@@ -5,7 +5,7 @@ $(document).ready(function () {
   var moneyElement = $("#activity_money");
   var noteElement = $("#activity_note");
 
-  $("form").submit(function(e) {  
+  $("form#form-create-activity").submit(function(e) {  
     $("input").each(function() {
       if ($(this).val() == "") { 
         $(this).addClass("blank-background");

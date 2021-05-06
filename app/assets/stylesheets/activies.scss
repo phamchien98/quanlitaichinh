@@ -53,7 +53,7 @@
     pointer-events: none;
 
     .modal-activity,
-    a[data-target='#Modal_activies'] {
+    a[data-target='#Modal_activies'], a[data-target='#Modal_receipts']{
       display: none;
     }
   }
