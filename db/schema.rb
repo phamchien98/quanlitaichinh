@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_025217) do
+ActiveRecord::Schema.define(version: 2021_05_04_034921) do
 
   create_table "activities", charset: "utf8mb4", force: :cascade do |t|
     t.integer "status"
@@ -69,6 +69,18 @@ ActiveRecord::Schema.define(version: 2021_04_15_025217) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "receipts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "image"
+    t.string "content"
+    t.float "total_money"
+    t.bigint "activity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["activity_id"], name: "index_receipts_on_activity_id"
+    t.index ["user_id"], name: "index_receipts_on_user_id"
+  end
+
   create_table "relationships", charset: "utf8mb4", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -101,4 +113,6 @@ ActiveRecord::Schema.define(version: 2021_04_15_025217) do
   add_foreign_key "photos", "posts"
   add_foreign_key "plans", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "receipts", "activities"
+  add_foreign_key "receipts", "users"
 end

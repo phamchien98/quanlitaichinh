@@ -18,7 +18,15 @@
   bottom: 0;
   right: 0;
   font-size: 0.75em;
-  color: blue;
+  color: cadetblue;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 2em;
+  font-size: 0.75em;
+  color: cadetblue;
 }
 
 .thead-calendar {
@@ -75,5 +83,9 @@
 }
 
 .blank-background {
-  border-color: red;
+  border-color: rgba(255, 228, 225, 1);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: white;
 }
