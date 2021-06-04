@@ -5,13 +5,13 @@
     <a href="#home" class="w3-bar-item w3-button"><b>ME</b>  Management</a>
     <div class="w3-right w3-hide-small">
       <% if user_signed_in? %>
-        <%= link_to "Blog", posts_path, class:"w3-bar-item w3-button"%>
-        <%= link_to "Activity", user_activies_path(current_user.id), class:"w3-bar-item w3-button"%>
-        <%= link_to "Plan", user_plans_path(current_user.id), class:"w3-bar-item w3-button"%>
-        <%= link_to "Profile", user_path(current_user.id), class:"w3-bar-item w3-button"%>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"w3-bar-item w3-button"%>
+        <%= link_to "Blog", posts_path, :class => current_class?(posts_path) %>
+        <%= link_to "Activity", user_activies_path(current_user.id), :class => current_class?(user_activies_path(current_user.id))%>
+        <%= link_to "Plan", user_plans_path(current_user.id), :class => current_class?(user_plans_path(current_user.id))%>
+        <%= link_to "Search", user_search_receipts_path(current_user.id), :class => current_class?(user_search_receipts_path(current_user.id))%>
+        <%= link_to "Profile", user_path(current_user.id), :class => current_class?(user_path(current_user.id))%>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => current_class?(destroy_user_session_path)%>
       <% else %>
-        <a href="#about" class="w3-bar-item w3-button">About</a>
         <%= link_to "Signin", new_user_session_path, class:"w3-bar-item w3-button"%>
         <%= link_to "Signup", new_user_registration_path, class:"w3-bar-item w3-button"%>
       <% end %>

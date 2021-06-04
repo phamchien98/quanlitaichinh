@@ -26,12 +26,18 @@ class ReceiptsController < ApplicationController
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
     end
-    data = JSON.parse(res.body)
-    p data
+    datas = JSON.parse(res.body)
+    
+    contents = []
+    datas.values[0].each do |data|
+      content = data.join(" ")
+      contents.append(content)
+    end
+    p contents
     temp = {
       time: time,
       image: image_file,
-      content: data,
+      content: contents,
       activity_id: 1
     }
     

@@ -1,0 +1,6 @@
+<%= form_tag(user_search_receipts_path, method: :get, class: "form-group field_search_name") do %>
+  <%= search_field_tag :search, params[:search] , placeholder: "Receipt content", class: "form-control border rounded", id: "search" %>
+  <%= button_tag :submit, class: "icon" do %>
+    <i class="fas fa-search"></i>
+  <%end%>
+<% end %>

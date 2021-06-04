@@ -29,13 +29,23 @@
       <tbody>
         <% @statistics.each do |plan| %>
     	    <tr>
+            <% diff_money_come = plan.money_come - plan.plan_money_come %>
+            <% diff_money_out = plan.plan_money_out - plan.money_out %>
     	      <th scope="row"><%= plan.id %></th>
     	      <td><%= plan.start_date %></td>
     	      <td><%= plan.end_date %></td>
     	      <td><%= plan.plan_money_come %></td>
     	      <td><%= plan.plan_money_out %></td>
-            <td><%= link_to plan.money_come, "#" %></td>
-            <td><%= link_to plan.money_out, "#" %></td>
+            <% if diff_money_come >= 0%>
+              <td><strong class= "text-success"><%= link_to plan.money_come, "#" %> </strong></td>
+            <% else %>
+              <td><%= link_to plan.money_come, "#" %></td>
+            <% end %>
+            <% if diff_money_out < 500000 %>
+              <td><strong class= "text-danger"><%= link_to plan.money_out, "#" %> </strong></td>
+            <% else %>
+              <td><%= link_to plan.money_out, "#" %></td>
+            <% end %>
             <td class="text-center">
                 <%= link_to edit_user_plan_path(current_user.id,plan.id) do %>
                   <i class="far fa-edit"></i> 

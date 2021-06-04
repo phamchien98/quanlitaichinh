@@ -29,6 +29,7 @@ class PlansController < ApplicationController
                       .select("plans.id AS id,start_date,end_date,plan_money_come,plan_money_out,SUM(IF(activities.status = 1,activities.money,0)) AS money_come,SUM(IF(activities.status = 0,activities.money,0)) AS money_out")
                       .where(user_id: current_user.id)
                       .group(:id)	
+    p @statistics
     @q = @statistics.ransack(params[:q])
     @statistics = @q.result.page(params[:page]).per(10)
   end
