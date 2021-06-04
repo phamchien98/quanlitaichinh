@@ -1,0 +1,11 @@
+<div class="row d-flex justify-content-center">
+<div class="landing-right text-center align-self-lg-center">
+  <div>
+    <%= form_with url: user_receipts_path(current_user.id), remote: true, scope: :receipt, method: :post do |f| %>
+      <%= f.date_field :time, class: "form-control my-3 mx-1" %>
+      <%= f.file_field :image, class: "my-3 mx-1" %>
+      <%= f.submit "Save", class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</div>
+</div>

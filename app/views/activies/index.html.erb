@@ -1,48 +1,58 @@
-<div class="col-md-8 offset-md-2 mb-5", id="calendar">
-  <% @sum_come_month = 0 %>
-  <% @sum_out_month = 0 %>
-  <%= month_calendar start_date_param: :my_date do |date| %>
-    <% activies_by_day = @activies.select { |a| a.time.to_date == date } %>
-  <div class="day" data-date="<%= date %>" data-toggle="tooltip" data-html="true" title="<% activies_by_day.each do |active| %><div class='money'><%= active.come? ? "+#{active.money}"+"&emsp;"+ active.note : "-#{active.money}"+"&emsp;"+ active.note %></div><% end %>">
-    <%= date.day %>
-      <% @sum_come = 0 %>
-      <% @sum_out = 0 %>
-      <% activies_by_day.each do |f| %>
-        <% if f.come? %>
-          <% @sum_come = @sum_come + f.money %>
-        <% else %>
-          <% @sum_out = @sum_out + f.money %>
-        <% end %>
+<div class="row">
+  <div class="col-8">
+    <div class="col-md-10 mb-5", id="calendar">
+      <% @sum_come_month = 0 %>
+      <% @sum_out_month = 0 %>
+      <%= month_calendar start_date_param: :my_date do |date| %>
+        <% activies_by_day = @activies.select { |a| a.time.to_date == date } %>
+      <div class="day" data-date="<%= date %>" data-toggle="tooltip" data-html="true" title="<% activies_by_day.each do |active| %><div class='money'><%= active.come? ? "+#{active.money}"+"&emsp;"+ active.note : "-#{active.money}"+"&emsp;"+ active.note %></div><% end %>">
+        <%= date.day %>
+          <% @sum_come = 0 %>
+          <% @sum_out = 0 %>
+          <% activies_by_day.each do |f| %>
+            <% if f.come? %>
+              <% @sum_come = @sum_come + f.money %>
+            <% else %>
+              <% @sum_out = @sum_out + f.money %>
+            <% end %>
+          <% end %>
+          <% @sum_come_month = @sum_come_month + @sum_come %>
+          <% @sum_out_month = @sum_out_month + @sum_out%>
+          <% unless @sum_come == 0 %>
+          <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
+          <% end %>
+          <% unless @sum_out == 0 %>
+            <div class="font-money-out modal-activity sum-money-out"><%= "-#@sum_out" %></div>
+          <% end %>
+          <%= link_to "javascript:void())", data: {target: "#Modal_receipts", toggle: "modal", day: date } do %>
+            <i class="fas fa-camera camera-icon"></i>
+          <% end %> 
+          <%= link_to "javascript:void())", data: {target: "#Modal_activies", toggle: "modal", day: date } do %>
+            <i class="fas fa-pencil-alt day-icon"></i>
+          <% end %> 
+      </div>
       <% end %>
-      <% @sum_come_month = @sum_come_month + @sum_come %>
-      <% @sum_out_month = @sum_out_month + @sum_out%>
-      <% unless @sum_come == 0 %>
-      <div style="min-height: 10px" class="font-money-come modal-activity sum-money-come"><%= "+#@sum_come" %></div>
-      <% end %>
-      <% unless @sum_out == 0 %>
-        <div class="font-money-out modal-activity sum-money-out"><%= "-#@sum_out" %></div>
-      <% end %>
-      <%= link_to "javascript:void())", data: {target: "#Modal_activies", toggle: "modal", day: date } do %>
-        <i class="fas fa-pencil-alt day-icon"></i>
-      <%end%> 
-  </div>
-  <% end %>
-</div>
+    </div>
 
-<% unless @sum_come_month==0 && @sum_out_month==0 %>
-  <div class="col-md-6 offset-md-3 mb-5 border rounded border-secondary">
-    <div class="row month-statistic p-2">
-      <div class="col-4 text-center ">Month money come</div>
-      <div class="col-4 text-center ">Month money out</div>
-      <div class="col-4  text-center ">Money Balance</div>
-    </div>
-    <div class="row p-1">
-      <div class="col-4 text-center "><%= @sum_come_month %></div>
-      <div class="col-4 text-center "><%= @sum_out_month %></div>
-      <div class="col-4  text-center "><%= @sum_come_month - @sum_out_month %></div>
-    </div>
+    <% unless @sum_come_month==0 && @sum_out_month==0 %>
+      <div class="col-md-6 offset-md-2 mb-5 border rounded border-secondary">
+        <div class="row month-statistic p-2">
+          <div class="col-4 text-center ">Month money come</div>
+          <div class="col-4 text-center ">Month money out</div>
+          <div class="col-4  text-center ">Money Balance</div>
+        </div>
+        <div class="row p-1">
+          <div class="col-4 text-center "><%= @sum_come_month %></div>
+          <div class="col-4 text-center "><%= @sum_out_month %></div>
+          <div class="col-4  text-center "><%= @sum_come_month - @sum_out_month %></div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-4">
+    <%= render "receipts/list_receipt", :receipts => @receipts %>
+  </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="Modal_activies" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -54,7 +64,31 @@
         </button>
       </div>
       <div class="expence-form modal-body">
-        <%= render "form" %>
+        <%= render partial: "form" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Modal_receipts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Post Receipt</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="receipt-form modal-body">
+        <div class="ml-5 d-flex justify-content-center align-self-center">
+          <div class="row">
+            <%= render partial: "receipts/form" %>
+          </div>
+          <div class="row">
+            <div class="preview-receipt">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
