@@ -56,4 +56,13 @@ class ActiviesController < ApplicationController
   def edit
   end
 
+  def search
+    if params[:search].blank?
+      redirect_to user_activies_path and return
+    else
+     
+      @parameter = params[:search].downcase
+      @result = Receipt.all.where("content LIKE :search", search: "%#{@parameter}")
+    end
+  end
 end

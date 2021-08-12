@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  get 'search_receipts/index'
   root "posts#index"
   
   devise_for :users
 
   resources :users, only: %i(index show) do
     resources :receipts
+    resources :search_receipts
     resources :activies
     resources :plans
     member do

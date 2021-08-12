@@ -1,0 +1,2 @@
+module SearchReceiptsHelper
+end

@@ -1,0 +1,6 @@
+<%= form_tag(search_path, method: :get) do %>
+  <%= search_field_tag :search, params[:search] , placeholder: "Start date or end date", class: "form-control border rounded", id: "search" %>
+  <%= button_tag :submit, class: "icon" do %>
+    <i class="fas fa-search"></i>
+  <%end%>
+<% end %>

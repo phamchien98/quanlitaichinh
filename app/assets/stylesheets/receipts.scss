@@ -11,9 +11,16 @@
 }
 
 .ocr-receipt {
-    width: 70rem;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 35rem;
+  width: 70rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 35rem;
+}
+
+.size-receipt-searched {
+  width: 30rem;
+  height: 35rem;
+  margin-bottom: 3rem;
+  margin-left: 3rem;
 }
